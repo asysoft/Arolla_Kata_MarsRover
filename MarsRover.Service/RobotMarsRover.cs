@@ -7,7 +7,11 @@
         public int PosX { get; set; }
         public int PosY { get; set; }
 
-        public char CurrentDirection { get; set; }  
+        public char CurrentDirection { get; set; }
+
+        // we Suppose Mars is projected into a plan surface X*Y
+        const int PLAN_MARS_Y = 1000;
+        const int PLAN_MARS_X = 1000;
 
         public RobotMarsRover(string name, int x, int y, char direction)
         {
@@ -51,19 +55,19 @@
         {
             if (CurrentDirection == 'N')
             {
-                PosY = PosY + 1;
+                PosY = (PosY + 1) % PLAN_MARS_Y;
             }
             else if (CurrentDirection == 'S')
             {
-                PosY = PosY - 1;
+                PosY = (PosY - 1) % PLAN_MARS_Y;
             }
             else if (CurrentDirection == 'W')
             {
-                PosX = PosX - 1;
+                PosX = (PosX - 1) % PLAN_MARS_X;
             }
             else if (CurrentDirection == 'E')
             {
-                PosX = PosX + 1;
+                PosX =  (PosX + 1) % PLAN_MARS_X;
             }
 
          }
@@ -72,19 +76,19 @@
         {
             if (CurrentDirection == 'N')
             {
-                PosY = PosY - 1;
+                PosY = (PosY - 1) % PLAN_MARS_Y;
             }
             else if (CurrentDirection == 'S')
             {
-                PosY = PosY + 1;
+                PosY = (PosY + 1) % PLAN_MARS_Y;
             }
             else if (CurrentDirection == 'W')
             {
-                PosX = PosX + 1;
+                PosX = (PosX + 1) % PLAN_MARS_X;
             }
             else if (CurrentDirection == 'E')
             {
-                PosX = PosX - 1;
+                PosX = (PosX - 1) % PLAN_MARS_X;
             }
         }
 
