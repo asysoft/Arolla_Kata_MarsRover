@@ -8,6 +8,7 @@ namespace MarsRover.Service
 {
     internal interface IMoveRobot
     {
-        void Move(char comand, char direction);
+        void Move(char command);
+        void MoveNCommands(char[] commands);
     }
 }
