@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace MarsRover.Service
 {
-    internal interface IDeplacerRobot
+    internal interface IMoveRobot
     {
-        void Deplacer(char comand, char direction);
+        void Move(char comand, char direction);
     }
 }

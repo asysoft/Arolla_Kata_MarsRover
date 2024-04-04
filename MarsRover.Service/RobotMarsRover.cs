@@ -1,6 +1,6 @@
 ﻿namespace MarsRover.Service
 {
-    public class RobotMarsRover : IDeplacerRobot
+    public class RobotMarsRover : IMoveRobot
     {
         public string Name;
         
@@ -14,13 +14,7 @@
             PosY = y;
         }
 
-        public enum commands
-        {
-            Faire_avancer = 'f' ,
-            Faire_Reculer_  = 'b'
-        }
-
-        public void Deplacer(char comand, char direction)
+        public void Move(char comand, char direction)
         {
             switch (comand)
             {
