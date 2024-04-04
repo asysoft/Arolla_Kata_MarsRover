@@ -1,4 +1,6 @@
-﻿namespace MarsRover.Service
+﻿using static System.Runtime.CompilerServices.RuntimeHelpers;
+
+namespace MarsRover.Service
 {
     public class RobotMarsRover : IMoveRobot
     {
@@ -8,6 +10,9 @@
         public int PosY { get; set; }
 
         public char CurrentDirection { get; set; }
+
+        private int posTryX;
+        private int posTryY;
 
         // we Suppose Mars is projected into a plan surface X*Y
         const int PLAN_MARS_Y = 1000;
@@ -47,48 +52,114 @@
         {
             for (int i = 0; i < commands.Length; i++)
             {
+                if (checkObstacle())
+                {
+                    ReportObstacleFound();
+                    break;
+                }
                 Move(commands[i]);
             }
         }
 
-        private void MoveForward()
+        private bool checkObstacle()
+        {
+            bool res = false;
+
+            // How to detect an obstacle ? Matrice X,Y of obstacle positions?
+
+            return res;
+        }
+        private void ReportObstacleFound( )
+        {
+            Console.WriteLine("Obstacle found at {0} , {1}", posTryX, posTryY);
+            Console.WriteLine("Waiting for new Instructions. Current Position : ({0},{1},{2} )", PosX, PosY, CurrentDirection);
+        }
+        private void MoveForward( bool tryMove = false)
         {
             if (CurrentDirection == 'N')
             {
-                PosY = (PosY + 1) % PLAN_MARS_Y;
+                if (tryMove)
+                {
+                    posTryY = (PosY + 1) % PLAN_MARS_Y;
+                    posTryX = PosX;
+                }
+                else
+                    PosY = (PosY + 1) % PLAN_MARS_Y;
             }
             else if (CurrentDirection == 'S')
             {
-                PosY = (PosY - 1) % PLAN_MARS_Y;
+                if (tryMove)
+                {
+                    posTryY = (PosY - 1) % PLAN_MARS_Y;
+                    posTryX = PosX;
+                }
+                else
+                    PosY = (PosY - 1) % PLAN_MARS_Y;
             }
             else if (CurrentDirection == 'W')
             {
-                PosX = (PosX - 1) % PLAN_MARS_X;
+                if (tryMove)
+                {
+                    posTryX = (PosX - 1) % PLAN_MARS_X;
+                    posTryY = PosY;
+                }
+                else
+                    PosX = (PosX - 1) % PLAN_MARS_X;
             }
             else if (CurrentDirection == 'E')
             {
-                PosX =  (PosX + 1) % PLAN_MARS_X;
+                if (tryMove)
+                {
+                    posTryX = (PosX + 1) % PLAN_MARS_X;
+                    posTryY = PosY;
+                }
+                else
+                    PosX =  (PosX + 1) % PLAN_MARS_X;
             }
 
          }
 
-        private void MoveBackward()
+        private void MoveBackward(bool tryMove = false)
         {
             if (CurrentDirection == 'N')
             {
-                PosY = (PosY - 1) % PLAN_MARS_Y;
+                if (tryMove)
+                {
+                    posTryY = (PosY - 1) % PLAN_MARS_Y;
+                    posTryX = PosX;
+                }
+                else
+                    PosY = (PosY - 1) % PLAN_MARS_Y;
             }
             else if (CurrentDirection == 'S')
             {
-                PosY = (PosY + 1) % PLAN_MARS_Y;
+                if (tryMove)
+                {
+                    posTryY = (PosY + 1) % PLAN_MARS_Y;
+                    posTryX = PosX;
+                }
+                else
+                    PosY = (PosY + 1) % PLAN_MARS_Y;
             }
             else if (CurrentDirection == 'W')
             {
-                PosX = (PosX + 1) % PLAN_MARS_X;
+                if (tryMove)
+                {
+                    posTryX = (PosX + 1) % PLAN_MARS_X;
+                    posTryY = PosY;
+                }
+                else
+                    PosX = (PosX + 1) % PLAN_MARS_X;
             }
             else if (CurrentDirection == 'E')
             {
-                PosX = (PosX - 1) % PLAN_MARS_X;
+                if (tryMove)
+                {
+                    posTryX = (PosX - 1) % PLAN_MARS_X;
+                    posTryY = PosY;
+                }
+                else
+                    PosX = (PosX - 1) % PLAN_MARS_X;
             }
         }
 
